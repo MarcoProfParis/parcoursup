@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Open URLs in Tabs</title>
+  <title>Open Multiple URLs</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 50px;
+      padding: 30px;
     }
     input {
       width: 80%;
@@ -16,26 +16,25 @@
     button {
       padding: 10px 20px;
       font-size: 16px;
-      margin-left: 10px;
     }
   </style>
 </head>
 <body>
-  <h2>Enter comma-separated URLs</h2>
+  <h2>Open Multiple URLs</h2>
   <input type="text" id="urlInput" placeholder="https://example.com, https://another.com">
-  <button onclick="openUrls()">Open URLs</button>
+  <button id="openButton">Open URLs</button>
 
   <script>
-    function openUrls() {
+    document.getElementById('openButton').addEventListener('click', function () {
       const input = document.getElementById('urlInput').value;
-      const urls = input.split('#').map(url => url.trim()).filter(url => url);
+      const urls = input.split(',').map(url => url.trim()).filter(url => url);
 
-      urls.forEach(url => {
-        // Ensure the URL starts with http/https
-        const prefixedUrl = url.match(/^https?:\/\//) ? url : 'http://' + url;
-        window.open(prefixedUrl, '_blank');
-      });
-    }
+      // Open each URL in a new tab/window synchronously
+      for (let url of urls) {
+        const finalUrl = url.match(/^https?:\/\//) ? url : 'http://' + url;
+        window.open(finalUrl, '_blank');
+      }
+    });
   </script>
 </body>
 </html>
