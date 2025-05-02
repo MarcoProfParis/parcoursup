@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Open URLs in Tabs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Enter comma-separated URLs</h2>
+  <input type="text" id="urlInput" placeholder="https://example.com, https://another.com">
+  <button onclick="openUrls()">Open URLs</button>
+
+  <script>
+    function openUrls() {
+      const input = document.getElementById('urlInput').value;
+      const urls = input.split(',').map(url => url.trim()).filter(url => url);
+
+      urls.forEach(url => {
+        // Ensure the URL starts with http/https
+        const prefixedUrl = url.match(/^https?:\/\//) ? url : 'http://' + url;
+        window.open(prefixedUrl, '_blank');
+      });
+    }
+  </script>
+</body>
+</html>
