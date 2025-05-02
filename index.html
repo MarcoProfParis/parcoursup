@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Open Multiple URLs</title>
+  <title>Open URLs with Delay</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,8 +20,8 @@
   </style>
 </head>
 <body>
-  <h2>Open Multiple URLs</h2>
-  <input type="text" id="urlInput" placeholder="https://example.com, https://another.com">
+  <h2>Open Multiple URLs (with 1-second delay)</h2>
+  <input type="text" id="urlInput" placeholder="Enter comma-separated URLs">
   <button id="openButton">Open URLs</button>
 
   <script>
@@ -29,11 +29,12 @@
       const input = document.getElementById('urlInput').value;
       const urls = input.split(',').map(url => url.trim()).filter(url => url);
 
-      // Open each URL in a new tab/window synchronously
-      for (let url of urls) {
-        const finalUrl = url.match(/^https?:\/\//) ? url : 'http://' + url;
-        window.open(finalUrl, '_blank');
-      }
+      urls.forEach((url, index) => {
+        setTimeout(() => {
+          const finalUrl = url.match(/^https?:\/\//) ? url : 'http://' + url;
+          window.open(finalUrl, '_blank');
+        }, index * 1000); // Delay of 1000ms per URL
+      });
     });
   </script>
 </body>
