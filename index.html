@@ -28,7 +28,7 @@
   <script>
     function openUrls() {
       const input = document.getElementById('urlInput').value;
-      const urls = input.split(',').map(url => url.trim()).filter(url => url);
+      const urls = input.split('#').map(url => url.trim()).filter(url => url);
 
       urls.forEach(url => {
         // Ensure the URL starts with http/https
